@@ -1,0 +1,20 @@
+{
+  "name": "helpful-helper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abir-taheer/helpful-helper.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/abir-taheer/helpful-helper/issues"
+  },
+  "homepage": "https://github.com/abir-taheer/helpful-helper#readme"
+}
