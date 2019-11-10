@@ -45,7 +45,21 @@ app.use(require("./routes/api/user/state"));
 app.use(require("./routes/auth/signup"));
 app.use(require("./routes/auth/logout"));
 app.use(require("./routes/auth/login"));
-app.use(require("./routes/twilio/sms"));
+
+
+app.post('/', function(req, res) {
+    const twilio = require('twilio');
+    const twiml = new twilio.TwimlResponse();
+    if (req.body.Body === 'hello') {
+        twiml.message('Hi!');
+    } else if(req.body.Body === 'bye') {
+        twiml.message('Goodbye');
+    } else {
+        twiml.message('No Body param match, Twilio sends this in the request to your server.');
+    }
+    res.writeHead(200, {'Content-Type': 'text/xml'});
+    res.end(twiml.toString());
+});
 
 // Send static files
 app.use(express.static(path.join(__dirname, 'client/build')));
