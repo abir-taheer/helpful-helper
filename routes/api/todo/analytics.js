@@ -18,8 +18,8 @@ router.get("/api/todo/analytics", async (req, res) => {
        const result = regression.linear(points);
 
        let predictions = [];
-       for(let x = max_date.getDate(); x < max_date.getDate(); x++){
-            predictions.push([x, result.predict(x)]);
+       for(let x = max_date.getDate(); x < max_date.getDate() + 5; x++){
+            predictions.push(result.predict(x));
        }
 
        let data = {};
@@ -27,7 +27,7 @@ router.get("/api/todo/analytics", async (req, res) => {
        data.original = points;
        data.accuracy = result.r2;
        data.predictions = predictions;
-       res.json(predictions);
+       res.json(data);
 
    } else {
        res.json({success: false});

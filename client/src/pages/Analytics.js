@@ -12,7 +12,11 @@ export class Analytics extends React.Component {
             graphData: [{
                 label: 'Series 1',
                 data: [{x: 1573415490000, y: 10},{x: 1572980917000, y: 16},{x: 1573240118000, y: 14},{x: 1572545319000,y: 14},{x: 1572815317000,y: 16}]
-            }],
+            },
+                {
+                    label: 'Series 2',
+                    data: [{x: 1573415490000, y: 14.3},{x: 1572980917000, y: 14.3},{x: 1573240118000, y: 14.3},{x: 1572545319000,y: 14.4},{x: 1572815317000,y: 14.3}]
+                }],
             accuracy: 0,
             average: 0
         }
@@ -31,7 +35,6 @@ export class Analytics extends React.Component {
                 predictions.label = "Series 2";
                 predictions.data = [];
 
-                data.predictions.map(i => predictions.data.push({x: i[0], y: i[1]}));
 
                 predictions.data = data.predictions;
 
@@ -39,7 +42,10 @@ export class Analytics extends React.Component {
                 graphData.push(predictions);
 
                 let sum_predictions = 0;
-                data.predictions.map(i => sum_predictions+= i[1]);
+                for(let x = 0 ; x < data.predictions.length; x++){
+                    sum_predictions += data.predictions[x][1];
+                    console.log(data.predictions[x]);
+                }
                 let average = sum_predictions / 5;
 
                 console.log(graphData);
@@ -57,6 +63,9 @@ export class Analytics extends React.Component {
                 <div className={"flex-center"}>
                     <DataChart data={this.state.graphData}/>
                 </div>
+                <p className={"text-center"}>You should work around {Math.floor(this.state.average * 10) / 10}h o'clock for best consistency.</p>
+                <p className={"text-center"}><a style={{color: "Red"}}>Linear Regression</a></p>
+                <p className={"text-center"}><a style={{color: "Blue"}}>Actual Data</a></p>
                 <p className={"text-center"}>You should work around {Math.floor(this.state.average)}h o'clock for best consistency.</p>
             </div>
         );
