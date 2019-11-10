@@ -1,11 +1,11 @@
 const mysql = require("mysql");
 
 const pool = mysql.createPool({
-  connectionLimit: 20,
-  host: "localhost",
-  user: "username",
-  password: "password",
-  database: "helpful-helper"
+  connectionLimit: 5,
+  host: (process.env.MYSQL_HOST || "localhost"),
+  user: (process.env.MYSQL_USER || "user"),
+  password: (process.env.MYSQL_PASSWORD || "password"),
+  database: (process.env.MYSQL_DATABASE || "database")
 });
 
 pool.getConnection(function(err, connection) {
