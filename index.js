@@ -47,7 +47,7 @@ app.use(require("./routes/auth/logout"));
 app.use(require("./routes/auth/login"));
 
 
-app.post('/', function(req, res) {
+app.post('/sms', function(req, res) {
     const twilio = require('twilio');
     const twiml = new twilio.TwimlResponse();
     if (req.body.Body === 'hello') {
