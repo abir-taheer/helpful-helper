@@ -7,6 +7,8 @@ function getText(schedule){
         let start_time = new Date(current_data.start_time);
         let end_time = new Date(current_data.end_time);
 
+        this.state.now = new Date();
+        
         if(end_time > this.state.now){
             if(start_time < this.state.now && this.state.now < end_time ){
                 let seconds_remaining = Math.floor((end_time.getTime() - this.state.now.getTime()) / 1000);
