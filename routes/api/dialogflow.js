@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-router.get("/api/dialogflow", (req, res) => {
+router.post("/api/dialogflow", (req, res) => {
     let response = {
         "fulfillmentText": "displayed&spoken response",
         "fulfillmentMessages": [
