@@ -7,19 +7,19 @@ function getText(schedule){
         let start_time = new Date(current_data.start_time);
         let end_time = new Date(current_data.end_time);
 
-        this.state.now = new Date();
-        
-        if(end_time > this.state.now){
-            if(start_time < this.state.now && this.state.now < end_time ){
-                let seconds_remaining = Math.floor((end_time.getTime() - this.state.now.getTime()) / 1000);
+        let now = new Date();
+
+        if(end_time > now){
+            if(start_time < now && now < end_time ){
+                let seconds_remaining = Math.floor((end_time.getTime() - now.getTime()) / 1000);
                 let h = Math.floor(seconds_remaining / 3600);
                 let m = Math.floor((seconds_remaining % 3600) / 60);
                 let s = seconds_remaining % 60;
                 return `The current event, ${current_data.name} will end in ${h} hours  and ${m} minutes`;
             }
 
-            if(start_time > this.state.now){
-                let seconds_remaining = Math.floor(( start_time.getTime() - this.state.now.getTime()) / 1000);
+            if(start_time > now){
+                let seconds_remaining = Math.floor(( start_time.getTime() - now.getTime()) / 1000);
                 let h = Math.floor(seconds_remaining / 3600);
                 let m = Math.floor((seconds_remaining % 3600) / 60);
                 let s = seconds_remaining % 60;
