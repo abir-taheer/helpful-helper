@@ -17,7 +17,7 @@ router.post('/sms', async function(req, res) {
         }
 
     } else {
-        res.send("<Response><Message>Your account could not be located. Please go to https://</Message></Response>");
+        res.send("<Response><Message>Your account could not be located. Please go to https://helpful-helper.herokuapp.com/</Message></Response>");
     }
 });
 module.exports = router;
