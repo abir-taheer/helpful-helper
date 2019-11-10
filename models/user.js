@@ -120,6 +120,13 @@ const User = {
       if(results.length) resolve(results[0].user_id);
       else resolve(false);
     });
+  },
+  addTodo: (user_id, content, due_date) => {
+    return new Promise(resolve => {
+      let date = `${due_date.getFullYear()}-${due_date.getMonth() + 1}-${due_date.getDate()}`;
+      db.promiseQuery("INSERT INTO `todos`(`user_id`, `content`, `due`) VALUES (?, ?, ?)", [user_id, content, date]);
+      resolve();
+    });
   }
 };
 

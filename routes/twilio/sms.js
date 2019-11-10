@@ -10,6 +10,9 @@ router.post('/sms', async function(req, res) {
     if(user){
         if(message.toLowerCase().startsWith("add")){
             let request = message.replace("add", "").trim();
+            let date = new Date();
+            date.setDate(date.getDate() + 1);
+            await User.addTodo(user.user_id, request, date);
             res.send(`<Response><Message>${request} has been added to your todo list!</Message></Response>`);
         }
 
