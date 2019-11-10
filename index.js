@@ -1,3 +1,4 @@
+const db = require("./config/database");
 const bodyParser = require("body-parser");
 const cookieParser = require('cookie-parser');
 const path = require("path");
@@ -6,6 +7,32 @@ const app = express();
 const http = require('http');
 const server = http.createServer(app);
 const morgan = require("morgan");
+
+const expressSession = require("express-session");
+
+const MySQLStore = require('express-mysql-session')(expressSession);
+const sessionStore = new MySQLStore({
+    clearExpired: true,
+    checkExpirationInterval: 900000,
+    expiration: (30 * 86400 * 1000),
+    createDatabaseTable: true,
+}, db.pool);
+
+const session = expressSession({
+    secret: "some_semi_permanent_not_so_secret_secret",
+    name: "session",
+    resave: true,
+    saveUninitialized: true,
+    store: sessionStore,
+    cookie: {
+        path: '/',
+        httpOnly: true,
+        secure: false,
+        maxAge: (30 * 86400 * 1000)
+    }
+});
+
+app.use(session);
 
 const app_port = process.env.PORT || 3001;
 
