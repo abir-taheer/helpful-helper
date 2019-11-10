@@ -19,6 +19,8 @@ import '@material/form-field/dist/mdc.form-field.css';
 import {Button} from "@rmwc/button";
 import {Checkbox} from  "@rmwc/checkbox";
 
+import Logo from  "./../logo.png";
+
 import {Link} from 'react-router-dom';
 
 
@@ -62,7 +64,15 @@ export class Landing extends React.Component {
             return (
                 <div>
                     <NavBar />
-
+                    <Spacer height={"100px"} />
+                    <div className={"flex-center"}>
+                        <img src={Logo}/>
+                    </div>
+                    <h1 className={"text-center"} style={{color: "red", fontWeight: "200", marginTop: "-10px"}}>Helpster</h1>
+                    <p className={"text-center"}>Your first step to a better day</p>
+                    <div className={"flex-center"}>
+                        <Button raised>Sign In</Button>
+                    </div>
                 </div>
             );
 
