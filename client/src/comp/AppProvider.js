@@ -20,7 +20,6 @@ export class AppProvider extends React.Component {
             fetch('/api/user/state')
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data);
                     this.setState({
                         user: data,
                         initialized: true,

@@ -3,7 +3,7 @@ const router = require("express").Router();
 
 router.get("/api/user/state", (req, res) => {
   let info = {
-    signed_in: req.session.signed_in
+    signed_in: Boolean(req.session.signed_in)
   };
 
   if(req.session.signed_in){
