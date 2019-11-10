@@ -27,12 +27,7 @@ export class Landing extends React.Component {
     constructor(props) {
         super(props);
     }
-
     static contextType = AppContext;
-
-    componentDidMount() {
-        this.getPlaces();
-    }
 
     render() {
         return (
