@@ -1,6 +1,5 @@
 const db = require("./../config/database");
 const bcrypt = require("bcrypt");
-const logError = require("./../errors");
 const tools = require("./../config/tools");
 
 const getByEmail = (email) => {
@@ -83,7 +82,6 @@ const User = {
 
         })();
       } catch (er) {
-        logError(er);
         reject("There was an unknown error");
       }
     });
