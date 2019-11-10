@@ -9,8 +9,6 @@ const morgan = require("morgan");
 
 const app_port = process.env.PORT || 3001;
 
-
-
 app.use(cookieParser("some_semi_permanent_secret"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
