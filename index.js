@@ -14,6 +14,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(morgan("dev"));
 
+app.use(require("./routes/api/user/state"));
+app.use(require("./routes/auth/signup"));
+app.use(require("./routes/auth/logout"));
+app.use(require("./routes/auth/login"));
+
 // Send static files
 app.use(express.static(path.join(__dirname, 'client/build')));
 
