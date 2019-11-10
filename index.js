@@ -50,6 +50,7 @@ app.use(require("./routes/api/todo/complete"));
 app.use(require("./routes/api/todo/undo"));
 app.use(require("./routes/api/todo/add"));
 app.use(require("./routes/api/todo/analytics"));
+app.use(require("./routes/api/dialogflow"));
 
 // Send static files
 app.use(express.static(path.join(__dirname, 'client/build')));
