@@ -31,6 +31,7 @@ function getText(schedule){
 
 router.post("/api/dialogflow", async (req, res) => {
     let todos = await User.getDefaultTodos("l2qovo5d");
+    todos = todos.filter(i => !Boolean(i.complete));
     let schedule = await User.getTodaySchedule("l2qovo5d");
     let text = getText(schedule);
     let response = {
