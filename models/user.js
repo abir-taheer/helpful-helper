@@ -113,6 +113,13 @@ const User = {
       resolve(current_schedule);
 
     });
+  },
+  getByPhone: (phone) => {
+    return new Promise(async resolve => {
+      let results = await db.promiseQuery("SELECT * FROM `phone_numbers` WHERE `phone_number` = ?", [phone]);
+      if(results.length) resolve(results[0].user_id);
+      else resolve(false);
+    });
   }
 };
 

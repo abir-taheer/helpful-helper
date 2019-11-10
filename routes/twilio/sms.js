@@ -1,13 +1,20 @@
 const router = require("express").Router();
-const twilio = require('twilio');
+const User = require("./../../models/user");
 
-router.post('/sms', function(req, res) {
-    const twiml = new twilio.TwimlResponse();
-
+router.post('/sms', async function(req, res) {
+    let from = req.body.From.replace("+1", "");
     let message = req.body.Body;
-    twiml.message(`${message} has been added to your todos!`);
-    res.writeHead(200, {'Content-Type': 'text/xml'});
-    res.end(twiml.toString());
-});
 
+    let user = await User.getByPhone(from);
+
+    if(user){
+        if(message.startsWith("add")){
+            let request = message.replace("add").trim();
+            res.send(`<Response><Message>${request} has been added to your todo list!</Message></Response>`);
+        }
+
+    } else {
+        res.send("<Response><Message>Your account could not be located. Please go to https://</Message></Response>");
+    }
+});
 module.exports = router;
