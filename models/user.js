@@ -91,6 +91,28 @@ const User = {
       let phone_numbers = await db.promiseQuery("SELECT * FROM `phone_numbers` WHERE `user_id` = ? AND `verified` = 1", [user_id]);
       resolve(phone_numbers.map(i => i.phone_number));
     });
+  },
+  getTodaySchedule: (user_id) => {
+    return new Promise(async resolve => {
+      let date = new Date();
+      let day = date.getDay();
+      let schedule_options = await db.promiseQuery("SELECT * FROM `schedules` WHERE `active_days` LIKE ? AND `user_id` = ?", [`%${day}%`, user_id]);
+
+      let current_schedule = {};
+      if(schedule_options.length){
+        schedule_options = {
+          id: schedule_options[0].schedule_id,
+          name: schedule_options[0].name,
+          items: []
+        };
+
+        current_schedule.items = await db.promiseQuery("SELECT `name`, `start_time`, `end_time`, `name`, `item_id` FROM `schedule_items` WHERE `schedule_id` = ?", [current_schedule.id]);
+
+      }
+
+      resolve(current_schedule);
+
+    });
   }
 };
 

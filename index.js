@@ -45,6 +45,7 @@ app.use(require("./routes/api/user/state"));
 app.use(require("./routes/auth/signup"));
 app.use(require("./routes/auth/logout"));
 app.use(require("./routes/auth/login"));
+app.use(require("./routes/twilio/sms"));
 
 // Send static files
 app.use(express.static(path.join(__dirname, 'client/build')));

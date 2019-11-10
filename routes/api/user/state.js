@@ -14,6 +14,8 @@ router.get("/api/user/state", async (req, res) => {
             info.user.name = user.user_name;
             info.user.email = user.user_email;
             info.user.phone_numbers = await User.getVerifiedPhoneNumbers(req.session.user_id);
+            info.user.schedule = await User.getTodaySchedule(req.session.user_id);
+
             await res.json(info);
 
         } catch (e) {
