@@ -100,7 +100,7 @@ const User = {
 
       let current_schedule = {};
       if(schedule_options.length){
-        schedule_options = {
+        current_schedule = {
           id: schedule_options[0].schedule_id,
           name: schedule_options[0].name,
           items: []
@@ -127,6 +127,9 @@ const User = {
       db.promiseQuery("INSERT INTO `todos`(`user_id`, `content`, `due`) VALUES (?, ?, ?)", [user_id, content, date]);
       resolve();
     });
+  },
+  getDefaultTodos: async (user_id) => {
+    return await db.promiseQuery("SELECT * FROM `todos` WHERE `user_id` = ? AND (`due` >= CURDATE() OR `complete` = 0)", [user_id]);
   }
 };
 
