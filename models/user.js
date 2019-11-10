@@ -85,6 +85,12 @@ const User = {
         reject("There was an unknown error");
       }
     });
+  },
+  getVerifiedPhoneNumbers: (user_id) => {
+    return new Promise(async resolve => {
+      let phone_numbers = await db.promiseQuery("SELECT * FROM `phone_numbers` WHERE `user_id` = ? AND `verified` = 1", [user_id]);
+      resolve(phone_numbers.map(i => i.phone_number));
+    });
   }
 };
 
