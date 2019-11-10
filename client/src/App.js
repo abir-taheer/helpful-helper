@@ -12,6 +12,7 @@ import '@material/button/dist/mdc.button.css';
 import {Queue} from "./comp/Queue";
 import {Profile} from "./pages/Profile";
 import {Error404} from "./pages/Error404";
+import {Analytics} from "./pages/Analytics";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
                     <Route exact path="/" component={Landing}/>
                     <Route exact path="/login" component={Login}/>
                     <Route exact path={"/profile"} component={Profile}/>
+                    <Route exact path={"/analytics"} component={Analytics}/>
                     <Route component={Error404}/>
                 </Switch>
             </Router>

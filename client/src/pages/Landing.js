@@ -130,7 +130,7 @@ export class Landing extends React.Component {
                                     let end_time = new Date(v.end_time);
                                     if( end_time > this.state.now )
                                     return (
-                                        <DataTableRow key={i} activated={start_time < this.state.now && this.state.now < end_time}>
+                                        <DataTableRow key={i} activated={start_time < this.state.now && this.state.now < end_time} style={{color: (start_time < this.state.now && this.state.now < end_time ? "#2ecc71": "black")}}>
                                             <DataTableCell alignStart>{v.name}</DataTableCell>
                                             <DataTableCell alignEnd><Moment format="LT">{start_time}</Moment></DataTableCell>
                                         </DataTableRow>
@@ -211,5 +211,5 @@ function NewToDo(props) {
       </div>
     );
 
-};
+}
 

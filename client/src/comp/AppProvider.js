@@ -44,7 +44,7 @@ export class AppProvider extends React.Component {
             initialized: false,
             setupError: false,
             errorCountdown: 0,
-            app_title: "App",
+            app_title: "Helpster",
             user: {},
             updateAppContext: this.updateAppContext,
         };

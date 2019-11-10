@@ -19,6 +19,8 @@ import {Link} from "react-router-dom";
 // State from Provider
 import {AppContext} from "./AppProvider";
 
+import Logo from "./../logo.png";
+import {Spacer} from "./Spacer";
 
 export class NavBar extends React.Component {
     constructor(props) {
@@ -41,7 +43,9 @@ export class NavBar extends React.Component {
                         {(context) => {
                             return (
                                 <DrawerHeader>
-                                    <DrawerTitle>{context.app_title}</DrawerTitle>
+                                    <Spacer height={"20px"} />
+                                    <img src={Logo} style={{height: "4em"}}/>
+                                    <DrawerTitle><a  className={"oswald"}>{context.app_title}</a></DrawerTitle>
                                     <DrawerSubtitle>{context.user.signed_in ? "Signed in as " + context.user.name : "Not Signed In"}</DrawerSubtitle>
                                 </DrawerHeader>
                             );
@@ -69,6 +73,30 @@ export class NavBar extends React.Component {
                                     graphic="home"
                                 />
                             </Link>
+
+                            <AppContext.Consumer>
+                                {
+                                    (context) => {
+                                        if(context.user.signed_in)
+                                            return (
+                                                <div>
+                                                    <Link to="/profile" className={["no-decoration"]}>
+                                                        <SimpleListItem
+                                                            text="Profile"
+                                                            graphic="person"
+                                                        />
+                                                    </Link>
+                                                    <Link to="/analytics" className={["no-decoration"]}>
+                                                        <SimpleListItem
+                                                            text="Analytics"
+                                                            graphic="multiline_chart"
+                                                        />
+                                                    </Link>
+                                                </div>
+                                            );
+                                    }
+                                }
+                            </AppContext.Consumer>
 
 
                             {/*LogOut Button*/}
@@ -104,7 +132,7 @@ export class NavBar extends React.Component {
                                     style={{
                                         color: "black"
                                     }}
-                                    title={context.app_title}
+                                    title={<a  className={"oswald"}>{context.app_title}</a>}
                                         navigationIcon={{ onClick: () => this.toggleDrawer() }}
                                 />
                             )
