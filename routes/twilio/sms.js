@@ -8,8 +8,8 @@ router.post('/sms', async function(req, res) {
     let user = await User.getByPhone(from);
 
     if(user){
-        if(message.startsWith("add")){
-            let request = message.replace("add").trim();
+        if(message.toLowerCase().startsWith("add")){
+            let request = message.replace("add", "").trim();
             res.send(`<Response><Message>${request} has been added to your todo list!</Message></Response>`);
         }
 
