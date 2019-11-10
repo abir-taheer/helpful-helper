@@ -11,6 +11,14 @@ import '@material/icon-button/dist/mdc.icon-button.css';
 import {Card, CardMedia, CardPrimaryAction} from '@rmwc/card';
 import '@material/layout-grid/dist/mdc.layout-grid.css';
 
+import '@material/list/dist/mdc.list.css';
+import {List, SimpleListItem} from "@rmwc/list";
+import '@material/checkbox/dist/mdc.checkbox.css';
+import '@material/form-field/dist/mdc.form-field.css';
+
+import {Button} from "@rmwc/button";
+import {Checkbox} from  "@rmwc/checkbox";
+
 import {Link} from 'react-router-dom';
 
 
@@ -134,8 +142,74 @@ export class Landing extends React.Component {
                 </div>
                 <Spacer height={15}/>
                 <h3 className={"text-center"}>Todo Items:</h3>
+                <div style={{width: "500px", marginLeft: "calc(50% - 250px)"}}>
+                    <List twoLine>
+                        {
+                            this.context.user.todos.map(i => {
+                               return (
+                                   <ToDoItem data={i}/>
+                               )
+                            })
+                        }
+                    </List>
+                    <Spacer height={20} />
+                    <NewToDo/>
+                </div>
+
+
             </div>
         )
     }
 
 }
+
+function ToDoItem(props){
+    let [checked, setChecked] = React.useState(Boolean(props.data.complete));
+
+    let updateCheck = () => {
+        fetch(`/api/todo/${ checked ? "undo" : "complete"}/${props.data.id}`)
+            .then(() => setChecked(! checked));
+    };
+
+    return (
+        <div>
+            <SimpleListItem
+                graphic={checked ? "radio_button_checked" : "radio_button_unchecked"}
+                text={props.data.content}
+                secondaryText={<a>Due {new Date(props.data.due).toDateString()}</a>}
+                onClick={updateCheck}
+            />
+        </div>
+    )
+}
+
+function NewToDo(props) {
+    let context = React.useContext(AppContext);
+    let [text, setText] = React.useState("");
+    let [date, setDate] = React.useState("");
+    let submitTodo = () => {
+        let data = {content: text, due: date};
+        fetch("/api/todo/add", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            redirect: 'follow',
+            referrer: 'no-referrer',
+            body: JSON.stringify(data)
+        })
+            .then(() => context.updateAppContext());
+    };
+
+    return (
+      <div>
+          <TextField style={{width: "100%"}} outlined label="New Todo" value={text} onChange={ev => setText(ev.target.value)}/>
+          <Spacer height={5} />
+          <TextField type={"date"} outlined value={date} onChange={ev => setDate(ev.target.value)}/>
+          <Spacer height={10} />
+          <Button raised onClick={submitTodo}>Submit</Button>
+      </div>
+    );
+
+};
+
